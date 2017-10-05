@@ -1197,7 +1197,8 @@ function get_scorm_default (&$userdata, $scorm, $scoid, $attempt, $mode) {
 
     if ($usertrack = scorm_get_tracks($scoid, $USER->id, $attempt)) {
         // According to SCORM 2004(RTE V1, 4.2.8), only cmi.exit==suspend should allow previous datamodel elements on re-launch.
-        if (isset($usertrack->{'cmi.exit'}) && ($usertrack->{'cmi.exit'} == 'suspend')) {
+        // Previous datamodel elements should also be available in review mode
+        if ($mode == 'review' || (isset($usertrack->{'cmi.exit'}) && ($usertrack->{'cmi.exit'} == 'suspend'))) {
             foreach ($usertrack as $key => $value) {
                 $userdata->$key = $value;
             }
