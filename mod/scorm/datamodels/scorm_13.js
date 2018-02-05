@@ -865,7 +865,7 @@ function SCORMapi1_3(def, cmiobj, cmiint, cmicommentsuser, cmicommentslms, scorm
             // check for prefix on each node
             if (correct_responses[interactiontype].pre != '') {
                 matches = nodes[i].match(correct_responses[interactiontype].pre);
-                if (matches != null) {
+                if (matches != null && matches[1]) {
                     nodes[i] = nodes[i].substr(matches[1].length);
                 }
             }
